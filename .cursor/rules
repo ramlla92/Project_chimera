@@ -1,35 +1,48 @@
 # Project Chimera – Agent Rules
 
-## Project Context
-- This repository is **Project Chimera**, an autonomous influencer network built around Chimera Agents, an Orchestrator, and Swarm-style coordination.
-- The goal is to create a **spec-driven**, **test-first**, **agent-ready** codebase that a swarm of AI agents can safely use to build and maintain features.
-- The system uses MCP for external integrations and Swarm / HITL patterns for resilient, governed operation, as described in the SRS.
+## 1. Project Context
 
-## Prime Directive
-- NEVER generate or modify code, tests, or configurations without first checking the relevant files in `specs/` and the SRS in `docs/` or `research/`.
-- If there is any conflict between existing code and the specs/SRS, call it out explicitly and propose a spec update before changing behavior.
+- This repository is a **spec‑driven, test‑first blueprint** for Project Chimera, an autonomous influencer system.
+- The goal is to define structure, specifications, skill interfaces, failing tests, Docker, and CI that future agents can safely build on, **not** to implement the full production Chimera OS.[file:1]
 
-## How to Use Project Documents
-- Use the **SRS** (`docs/` or `research/chimera_srs.md`) to understand the overall vision, business models, actors, and constraints.
-- Use `specs/_meta.md` for high-level vision, scope, and non-goals of this implementation.
-- Use `specs/functional.md` to derive user stories, scenarios, and acceptance criteria for agents and users.
-- Use `specs/technical.md` for API contracts, data structures, and database schema; align all interfaces and tests with this file.
+## 2. Prime Directives
+
+- Always read the relevant files in `specs/` (and the SRS in `docs/`) before proposing or generating any code, tests, or configurations.[file:1]
+- Do not introduce new behaviors, skills, or APIs that are not described or clearly implied in the specs/SRS; if needed, propose a spec change first.
+- If you detect a mismatch between specs and behavior, explicitly call it out and suggest a concrete update to `specs/` before changing tests or code.
+
+## 3. Challenge Scope (Avoid Over‑Engineering)
+
+- Treat this as a **3‑day challenge repository**: focus on repo layout, specs, conceptual agent roles, API/data schemas, skill interfaces, failing tests, Docker, and CI.[file:1]
+- Do **not** design or describe full Swarm orchestration loops, detailed MCP servers, Coinbase AgentKit flows, or production deployment unless explicitly requested.
+- Do **not** assume or create extra directories or abstractions (e.g., `drivers/`, complex base classes, Redis loops, Pydantic models) unless they are explicitly needed for this repo.
+- When unsure whether something belongs here or only in the long‑term SRS, ask, and by default keep `specs/` scoped to what this repository must define.
+
+## 4. Use of Project Documents
+
+- Use the SRS in `docs/` to understand high‑level vision, business models, and actors.[file:1]
+- Use `specs/_meta.md` for this repo’s scope, constraints, and non‑goals, and align your suggestions with it.
+- Use `specs/functional.md` for user stories and acceptance criteria; derive behaviors and tests from there.
+- Use `specs/technical.md` for API contracts, data structures, and storage schemas; keep interfaces and tests consistent with these definitions.
 - Use `specs/openclaw_integration.md` when reasoning about agent social/network protocols and external coordination.
-- Use `skills/` to understand runtime skills and their input/output contracts; do not invent new skills without updating this directory.
-- Use `tests/` as the source of truth for expected behavior; prefer updating tests and specs together, then implementing code to satisfy them.
+- Use `skills/` to define and refine runtime skill interfaces (inputs/outputs); do not invent new skills without updating this directory.
+- Use `tests/` as the executable expression of expected behavior; update specs and tests together before implementation.
 
-## Working Style and Expectations
-- Before proposing any substantial change, briefly explain your plan in 3–5 bullet points referencing the relevant specs/SRS sections.
-- Work in small, incremental steps (one file or concern at a time) so changes are easy to review and trace.
-- When you lack information, ask clarifying questions or suggest specific additions to the specs instead of guessing.
-- Prefer deterministic, testable designs and explicit interfaces over hidden magic or prompt-only behavior.
+## 5. Working Style and Expectations
 
-## Safety, Governance, and Commerce
-- Respect HITL (Human-in-the-Loop) patterns: clearly mark any behavior that should require human review (e.g., publishing content, executing on-chain transactions).
-- Highlight any security or data-isolation risks, especially around multi-tenant data and Agentic Commerce (wallets, on-chain actions).
-- Do not add new external services, MCP servers, or financial capabilities without a corresponding spec update and a note in `docs/decisions.md` (if present).
+- Before any substantial change, briefly state your plan in 3–5 bullet points and reference specific spec/SRS sections.
+- Work in small, incremental steps (one concern or file at a time) so changes remain easy to review and trace.
+- When information is missing or ambiguous, ask targeted clarification questions or propose specific spec additions instead of guessing.
+- Prefer deterministic, testable designs and explicit interfaces over “prompt‑only” behavior or hidden assumptions.
 
-## Collaboration and Traceability
-- Ensure every new feature or change is linked to at least one user story or requirement from the SRS and/or `specs/functional.md`.
-- When generating tests, state which spec or requirement each test validates.
-- Write commit messages that reflect spec or behavior changes (e.g., `feat: add trend fetcher API per technical spec`).
+## 6. Safety, Governance, and Commerce
+
+- Assume Human‑in‑the‑Loop and CI review for actions that publish content or move money, even if those flows are only modeled in specs.[file:1]
+- Highlight security, privacy, or multi‑tenant isolation risks when proposing changes related to content, data, or commerce.
+- Do not add external services, MCP servers, or financial capabilities without justification and a corresponding update to `specs/` and (optionally) `docs/decisions.md`.
+
+## 7. Collaboration and Traceability
+
+- Link every new feature or change to at least one user story or requirement from the SRS and/or `specs/functional.md`.
+- When generating tests, state which spec or requirement each test validates, preferably in comments or test names.
+- Write commit messages that clearly reflect spec or behavior changes (e.g., `feat: add trend fetcher API per technical spec`).
