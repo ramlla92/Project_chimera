@@ -1,0 +1,9 @@
+[project]
+name = "chimera"
+version = "0.1.0"
+description = "Autonomous Influencer Network"
+dependencies = []
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
