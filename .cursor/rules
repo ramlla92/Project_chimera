@@ -1,0 +1,35 @@
+# Project Chimera – Agent Rules
+
+## Project Context
+- This repository is **Project Chimera**, an autonomous influencer network built around Chimera Agents, an Orchestrator, and Swarm-style coordination.
+- The goal is to create a **spec-driven**, **test-first**, **agent-ready** codebase that a swarm of AI agents can safely use to build and maintain features.
+- The system uses MCP for external integrations and Swarm / HITL patterns for resilient, governed operation, as described in the SRS.
+
+## Prime Directive
+- NEVER generate or modify code, tests, or configurations without first checking the relevant files in `specs/` and the SRS in `docs/` or `research/`.
+- If there is any conflict between existing code and the specs/SRS, call it out explicitly and propose a spec update before changing behavior.
+
+## How to Use Project Documents
+- Use the **SRS** (`docs/` or `research/chimera_srs.md`) to understand the overall vision, business models, actors, and constraints.
+- Use `specs/_meta.md` for high-level vision, scope, and non-goals of this implementation.
+- Use `specs/functional.md` to derive user stories, scenarios, and acceptance criteria for agents and users.
+- Use `specs/technical.md` for API contracts, data structures, and database schema; align all interfaces and tests with this file.
+- Use `specs/openclaw_integration.md` when reasoning about agent social/network protocols and external coordination.
+- Use `skills/` to understand runtime skills and their input/output contracts; do not invent new skills without updating this directory.
+- Use `tests/` as the source of truth for expected behavior; prefer updating tests and specs together, then implementing code to satisfy them.
+
+## Working Style and Expectations
+- Before proposing any substantial change, briefly explain your plan in 3–5 bullet points referencing the relevant specs/SRS sections.
+- Work in small, incremental steps (one file or concern at a time) so changes are easy to review and trace.
+- When you lack information, ask clarifying questions or suggest specific additions to the specs instead of guessing.
+- Prefer deterministic, testable designs and explicit interfaces over hidden magic or prompt-only behavior.
+
+## Safety, Governance, and Commerce
+- Respect HITL (Human-in-the-Loop) patterns: clearly mark any behavior that should require human review (e.g., publishing content, executing on-chain transactions).
+- Highlight any security or data-isolation risks, especially around multi-tenant data and Agentic Commerce (wallets, on-chain actions).
+- Do not add new external services, MCP servers, or financial capabilities without a corresponding spec update and a note in `docs/decisions.md` (if present).
+
+## Collaboration and Traceability
+- Ensure every new feature or change is linked to at least one user story or requirement from the SRS and/or `specs/functional.md`.
+- When generating tests, state which spec or requirement each test validates.
+- Write commit messages that reflect spec or behavior changes (e.g., `feat: add trend fetcher API per technical spec`).
