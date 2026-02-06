@@ -2,7 +2,9 @@
 name = "chimera"
 version = "0.1.0"
 description = "Autonomous Influencer Network"
-dependencies = []
+dependencies = [
+    "pytest>=9.0.2",
+]
 
 [build-system]
 requires = ["hatchling"]

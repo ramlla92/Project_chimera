@@ -20,14 +20,14 @@ COPY pyproject.toml .
 # Note: If uv.lock existed, we would COPY it here.
 # Since it doesn't, uv sync will create it in the image.
 
-# Install dependencies (uv sync creates a virtualenv in /app/.venv by default)
-RUN uv sync --no-dev --no-install-project
+# Install dependencies (including pytest) into the virtualenv
+RUN uv sync --no-install-project
 
 # Copy the rest of the application
 COPY . .
 
 # Final sync to install the project itself if it's a package
-RUN uv sync --no-dev
+RUN uv sync
 
 # Default command
 CMD ["uv", "run", "pytest"]
