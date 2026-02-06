@@ -1,2 +1,9 @@
-# CodeRabbit Configuration
-version: 1.0
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+version: "2.0"
+reviews:
+  enabled: true
+  auto_review: true
+instructions: |
+  1. Spec Alignment: Verify that all code changes align strictly with the requirements in the `specs/` directory.
+  2. Security: Proactively identify and flag any obvious security vulnerabilities or risks.
+  3. Testing: Prefer and prioritize pull requests that include new test cases or updates to existing tests in the `tests/` directory.
