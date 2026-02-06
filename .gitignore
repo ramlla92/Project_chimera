@@ -20,7 +20,8 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-
+venv/
+.venv
 # Editor
 .idea/
 .vscode/
@@ -28,3 +29,4 @@ wheels/
 # Project
 artifacts/
 brain/
+uv.lock
